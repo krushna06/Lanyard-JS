@@ -1,5 +1,4 @@
 const { Client, GatewayIntentBits } = require('discord.js');
-const express = require('express');
 
 const client = new Client({
     intents: [
@@ -10,15 +9,16 @@ const client = new Client({
     ]
 });
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-
 function isoToTimestamp(isoDate) {
     return new Date(isoDate).getTime();
 }
 
 async function fetchUserData(userId) {
     try {
+        if (!client.isReady()) {
+            throw new Error('Client is not ready');
+        }
+
         const user = await client.users.fetch(userId);
         const guild = client.guilds.cache.first();
         const member = guild ? await guild.members.fetch(userId) : null;
@@ -101,51 +101,7 @@ async function fetchUserData(userId) {
     }
 }
 
-app.get('/api/v1/user/:userid', async (req, res) => {
-    const userId = req.params.userid;
-
-    try {
-        const userData = await fetchUserData(userId);
-
-        if (!userData || userData.success === false) {
-            return res.status(404).json({ success: false, message: "User not found." });
-        }
-
-        res.json(userData);
-    } catch (error) {
-        console.error("Error fetching user data:", error);
-        res.status(500).json({ success: false, message: "Internal Server Error" });
-    }
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-
-client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
-});
-
-client.on('messageCreate', async (message) => {
-    if (message.author.bot) return;
-
-    if (message.content.startsWith('!userdata')) {
-        const mentionedUser = message.mentions.users.first();
-
-        if (!mentionedUser) {
-            message.channel.send("Please mention a user to fetch data.");
-            return;
-        }
-
-        const userData = await fetchUserData(mentionedUser.id);
-
-        if (!userData || userData.success === false) {
-            message.channel.send("Could not fetch data for the mentioned user.");
-            return;
-        }
-
-        message.channel.send("```json\n" + JSON.stringify(userData, null, 2) + "\n```");
-    }
-});
-
-client.login('something');
+module.exports = {
+    client,
+    fetchUserData
+};
