@@ -3,13 +3,45 @@
 This project provides an API to fetch user data and their activities from Discord, including Spotify integration.
 
 ## Table of Contents
-
+- [Project Tree](#project-tree)
 - [API Endpoints](#api-endpoints)
   - [Fetch User Data](#fetch-user-data)
 - [Example Response](#example-response)
 - [Discord Bot Commands](#discord-bot-commands)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Project Tree
+
+```
+📦 
+├─ .gitignore
+├─ LICENSE
+├─ README.md
+├─ package.json
+└─ src
+   ├─ api
+   │  ├─ controllers
+   │  │  └─ userController.js
+   │  ├─ middlewware
+   │  │  └─ errorMiddleware.js
+   │  └─ routes
+   │     └─ userRoutes.js
+   ├─ bot
+   │  ├─ commands
+   │  │  └─ userdata.js
+   │  └─ events
+   │     ├─ messageCreate.js
+   │     └─ ready.js
+   ├─ config
+   │  ├─ botConfig.js
+   │  └─ serverConfig.js
+   ├─ index.js
+   ├─ services
+   │  └─ userService.js
+   └─ utils
+      └─ dateUtils.js
+```
 
 ## API Endpoints
 
@@ -22,7 +54,7 @@ This project provides an API to fetch user data and their activities from Discor
 **URL Parameters:**
 - `userid` (required): The ID of the Discord user you want to retrieve data for.
 
-**Response:**
+**Example Response:**
 
 ```json
 {
