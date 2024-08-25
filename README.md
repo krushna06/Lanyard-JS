@@ -7,7 +7,7 @@ This project provides an API to fetch user data and their activities from Discor
 - [API Endpoints](#api-endpoints)
   - [Fetch User Data](#fetch-user-data)
 - [Example Response](#example-response)
-- [Discord Bot Commands](#discord-bot-commands)
+- [Discord Bot Commands](#discord-commands)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -112,7 +112,7 @@ This project provides an API to fetch user data and their activities from Discor
 }
 ```
 
-## Commands
+## Discord Commands
 
 The bot responds to the following command in a Discord channel:
 
