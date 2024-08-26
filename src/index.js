@@ -15,6 +15,6 @@ app.listen(serverConfig.PORT, () => {
 });
 
 client.once('ready', () => ready(client));
-client.on('messageCreate', (message) => messageCreate(client));
+client.on('messageCreate', messageCreate);
 
 client.login(botConfig.BOT_TOKEN);
