@@ -117,6 +117,7 @@ This project provides an API to fetch user data and their activities from Discor
 The bot responds to the following command in a Discord channel:
 
 - `!userdata @user` - Fetches and displays the user data of the mentioned user in JSON format.
+- `!who @user` - Displays the user's lanyardjs link in an embed.
 
 ## Contributing
 
